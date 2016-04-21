@@ -1,0 +1,61 @@
+[
+	{
+		"id": 1,
+		"question": "Was versteht man im Kontext von Open Access unter dem <i>Goldenen Weg</i>?",
+		"options": [
+			"Die Veröffentlichung in einem Medium, dass den Bedingungen von Open Access folgt und die langfristige Verfügbarkeit und Archivierung sichert.",
+			"Die Veröffentlichung auf der eigenen Homepage.",
+			"Die Publikation von verwaisten Werken, deren Urheberrecht abgelaufen ist.",
+			"Eine Möglichkeit, den Zugang zu Veröffentlichungen auf einen bestimmten Personenkreis zu beschränken."
+		],
+		"info": "Mehr Informationen dazu <a href='https://open-access.net/informationen-zu-open-access/open-access-strategien/#c665' target='_blank'>finden Sie hier</a>.",
+		"answer": 0
+	},
+	{
+		"id": 2,
+		"question": "Was ist im Kontext von Open Access mit dem <i>Grünen Weg</i> gemeint?",
+		"options": [
+			"Diesen Begriff gibt es gar nicht.",
+			"Die Veröffentlichung und Archivierung durch die Autoren selbst.",
+			"Der Verzicht auf Peer Review, um Artikel schneller zu veröffentlichen.",
+			"Die Veröffentlichung ausschließlich als Druckwerk."
+		],
+		"info": "Mehr Informationen dazu <a href='https://open-access.net/informationen-zu-open-access/open-access-strategien/#c666' target='_blank'>finden Sie hier</a>.",
+		"answer": 1
+	},
+	{
+		"id": 3,
+		"question": "Unter Retrodigitalisierung versteht man &hellip;",
+		"options": [
+			"&hellip; das Einscannen von Lochkarten.",
+			"&hellip; die nachträgliche Digitalisierung ursprünglich nur gedruckt erschienener Werke.",
+			"&hellip; die Digitalisierung von Neuauflagen.",
+			"&hellip; die Umwandlung bereits digitalisierter Werke in ein neueres Format."
+		],
+		"answer": 1
+	},
+	{
+		"id": 4,
+		"question": "Wie viele Dokumente sind derzeit auf <i>eDiss</i>, dem Open-Access-Publikationsserver für Dissertationen der Universität Göttingen, verfügbar?",
+		"options": [
+			"Exakt 2750",
+			"Etwa 5500",
+			"Etwa 500",
+			"Knapp 150"
+		],
+		"info": "<a href='https://ediss.uni-goettingen.de/' target='_blank'>Besuchen Sie eDiss.</a>",
+		"answer": 1
+	},
+	{
+		"id": 5,
+		"question": "Was ist Open Access <b>nicht</b>?",
+		"options": [
+			"Eine bestimmte Lizenz.",
+			"Eine weltweite Initiative, wissenschaftliche Publikationen frei verfügbar zu machen.",
+			"Ein Publikationsmodell.",
+			"Eine Gefahr für Verlage, die stark überhöhte Preise für Zeitschriften verlangen."
+		],
+		"info": "Obgleich die meisten als Open Access verfügbaren Publikationen unter einer <a href='http://de.creativecommons.org/was-ist-cc/' target='_blank'>Creative-Commons-Lizenz</a> stehen, gibt Open Access keine konkrete Lizenz vor. Einzelne Zeitschriften können sich aber auf eine Lizenz festlegen.",
+		"answer": 0
+	}
+]

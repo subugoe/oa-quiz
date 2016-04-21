@@ -1,0 +1,23 @@
+.shariff {
+	margin-top: $g;
+	text-shadow: none;
+
+	ul {
+		margin: 0;
+	}
+
+	a {
+		border: 0;
+		border-radius: $br;
+		transition: background .5s;
+
+		&:focus,
+		&:hover {
+			transition: none;
+		}
+	}
+
+	.orientation-horizontal li {
+		margin-bottom: 0;
+	}
+}

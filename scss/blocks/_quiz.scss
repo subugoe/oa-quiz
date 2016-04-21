@@ -1,0 +1,278 @@
+.quiz {
+	color: $text-color;
+	font: #{$font-size} / #{$g} sans-serif;
+	margin: 0 auto;
+	max-width: 640px;
+
+	* {
+		box-sizing: border-box;
+		margin: 0;
+		padding: 0;
+	}
+
+	::-moz-focus-inner {
+		border: 0;
+		padding: 0;
+	}
+
+	a {
+		color: $link-color;
+		text-decoration: none;
+	}
+
+	h1,
+	h2,
+	p,
+	ul {
+		margin-bottom: $g;
+	}
+
+	h1 {
+		color: $text-color-light;
+		font-size: $font-size-big;
+		font-weight: bold;
+		letter-spacing: .1em;
+		text-transform: uppercase;
+	}
+
+	h2 {
+		font-weight: bold;
+	}
+
+	form > p:last-child {
+		margin-bottom: 0;
+	}
+}
+
+.quiz_answer {
+	border-radius: $br;
+	box-shadow: 0 -2px 0 $shadow-color inset;
+	color: #fff;
+	display: block;
+	overflow: hidden;
+	text-shadow: 0 -1px 0 $shadow-color-dark;
+
+	&.-correct {
+		background: $link-color;
+	}
+
+	&.-false {
+		background: #c45;
+	}
+
+	.fa {
+		background: $light-color;
+		display: table-cell;
+		padding: ($g / 2);
+		vertical-align: middle;
+	}
+}
+
+.quiz_answer-text {
+	display: table-cell;
+	padding: ($g / 2);
+}
+
+.quiz_button {
+	background: $button-bg-color;
+	border: 0 !important;
+	border-radius: $br;
+	box-shadow: 0 -2px 0 $shadow-color inset;
+	color: darken($button-bg-color, 28) !important;
+	cursor: pointer;
+	display: inline-block;
+	font: inherit;
+	font-weight: bold;
+	padding: 1em;
+	text-align: center;
+	text-decoration: none;
+	text-shadow: inherit;
+	transition: background .5s, color .5s !important;
+	width: 100%;
+
+	&:focus,
+	&:hover {
+		background: lighten($button-bg-color, 14);
+		transition: none !important;
+	}
+
+	&:disabled {
+		opacity: .5;
+		cursor: not-allowed;
+	}
+}
+
+.quiz_header {
+	padding: $g $g ($g / 2);
+	text-align: center;
+
+	@media (max-width: $break-point) {
+		padding: ($g / 2) ($g / 2) ($g / 4);
+	}
+
+	a {
+		display: inline-block;
+	}
+}
+
+.quiz_heading {
+	color: #fff;
+	font-size: $g * 1.5;
+	font-weight: bold;
+	letter-spacing: .1em;
+	line-height: 1;
+	margin: ($g / 4);
+	position: relative;
+	text-transform: uppercase;
+
+	@media (max-width: $break-point) {
+		font-size: $g;
+		margin-top: ($g / 4);
+	}
+}
+
+.quiz_item {
+	& + & {
+		margin-top: $g / 2;
+	}
+}
+
+.quiz_list {
+	list-style: none;
+}
+
+.quiz_logo {
+	display: block;
+	height: $g * 4;
+	margin: auto;
+
+	@media (max-width: $break-point) {
+		height: $g * 2;
+	}
+}
+
+.quiz_main {
+	background: #fff;
+	border-radius: $br;
+	box-shadow: 0 ($g / 2) $g $shadow-color-dark;
+	padding: $g * 2;
+	text-shadow: 0 0 1px #fff;
+
+	@media (max-width: $break-point) {
+		border-radius: 0;
+		padding: $g ($g / 2);
+	}
+
+	a {
+		border-bottom: 2px solid $accent-color-dark;
+		transition: border-color .5s;
+
+		&:focus,
+		&:hover {
+			border-color: $link-color;
+			transition: none;
+		}
+	}
+
+	:last-child {
+		margin-bottom: 0;
+	}
+}
+
+.quiz_option {
+	background: $accent-color;
+	border-radius: $br;
+	box-shadow: 0 -2px 0 $shadow-color inset;
+	color: $text-color-dark;
+	cursor: pointer;
+	display: block;
+	margin-bottom: $g / 2;
+	overflow: hidden;
+	transition: background .5s, color .5s, text-shadow .5s;
+
+	&:focus,
+	&:hover {
+		background: $accent-color-light;
+		transition: none;
+	}
+
+	.quiz_radio:checked + & {
+		background: $text-color;
+		color: #fff;
+		text-shadow: 0 -1px 0 $shadow-color-dark;
+	}
+
+	.fa {
+		background: $shadow-color;
+		color: #fff;
+		display: table-cell;
+		padding: ($g / 2);
+		text-shadow: 0 -1px 0 $shadow-color-dark;
+		vertical-align: middle;
+	}
+}
+
+.quiz_option-text {
+	display: table-cell;
+	padding: ($g / 2);
+}
+
+.quiz_p {
+	&.-center {
+		text-align: center;
+	}
+
+	&.-small {
+		color: $text-color-light;
+		font-size: $font-size-small;
+		line-height: $g * .75;
+		margin: 7px 0;
+	}
+
+	&.-right {
+		text-align: right;
+	}
+}
+
+.quiz_question {
+	.fa {
+		color: $accent-color-dark;
+	}
+}
+
+.quiz_radio {
+	display: none;
+}
+
+.quiz_row {
+	@extend %clearfix;
+
+	h1 {
+		float: left;
+	}
+}
+
+.quiz_score {
+	background: #eee;
+	line-height: 1;
+	font-size: 2em;
+	padding: $g;
+	text-align: center;
+}
+
+.quiz_time {
+	color: $text-color-light;
+	float: right;
+	font-size: $font-size-small;
+}
+
+.quiz_warning {
+	animation: fadeIn .5s;
+	animation-delay: 2s;
+	animation-fill-mode: forwards;
+	background: #fdd;
+	margin: 28px 0;
+	opacity: 0;
+	padding: .5em;
+	position: absolute;
+}
