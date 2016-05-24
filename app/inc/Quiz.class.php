@@ -9,7 +9,8 @@ class Quiz {
 	private $shuffleQuestions = true;
 	private $shuffleOptions = true;
 	private $questionsFile = 'data/questions.json';
-	private $logFile = 'data/scores.txt';
+	private $logFile = 'logs/scores.txt';
+	private $logFileGranular = 'logs/answers.txt';
 
 	function __construct() {
 		// First GET key is the desired route
@@ -46,7 +47,7 @@ class Quiz {
 
 	function startNew() {
 		$this->initSession();
-
+		
 		$_SESSION = [];
 		$_SESSION['correctCount'] = 0;
 		$_SESSION['lastQuestionShown'] = -1;
@@ -88,11 +89,14 @@ class Quiz {
 		if ( $_SESSION['lastQuestionAnswered'] < $number ) {
 			$timeRequired = microtime(true) - $_SESSION['timestamp'];
 			$_SESSION['timeElapsed'] += $timeRequired;
+			$correct = 0;
 			if ( $pickedOption === $question->answer ) {
 				$_SESSION['correctCount']++;
+				$correct = 1;
 			}
 			$timeRounded = round($timeRequired, 1);
-			$_SESSION['results'][] = "?{$this->questions[$number]->id}!{$question->answer}P{$pickedOption}T{$timeRounded}";
+			$_SESSION['results'][] = "?{$this->questions[$number]->id}!{$question->answer}P{$pickedOption}={$correct}T{$timeRounded}";
+			file_put_contents($this->logFileGranular, $_SESSION['sessionStarted'] . $_SESSION['results'][$number] . PHP_EOL, FILE_APPEND);
 		}
 		$_SESSION['lastQuestionAnswered'] = $number;
 
@@ -107,6 +111,7 @@ class Quiz {
 		$model->moreQuestions = ( $number + 1 < count($this->questions) );
 		$model->time = round($_SESSION['timeElapsed']);
 		$this->renderTemplate('answer', $model);
+
 	}
 
 	function showResults() {

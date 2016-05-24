@@ -1,0 +1,9 @@
+oaq:
+  build: .
+  container_name: oaq
+  ports:
+    - "90:80"
+  volumes:
+    - ./logs:/var/www/html/logs
+
+
