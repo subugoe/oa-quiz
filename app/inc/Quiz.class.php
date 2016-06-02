@@ -9,11 +9,16 @@ class Quiz {
 	private $shuffleQuestions = true;
 	private $shuffleOptions = true;
 	private $questionsFile = 'data/questions.json';
-	private $logFile = 'data/scores.txt';
+	private $logFile = 'logs/scores.txt';
+	private $logFileGranular = 'logs/answers.txt';
 
 	function __construct() {
 		// First GET key is the desired route
 		$route = key($_GET);
+
+		if ( ! touch($this->logFile) or ! touch($this->logFileGranular) ) {
+			die('Cannot write log files. Make sure the logs directory is writable.');
+		}
 
 		if ( $route === 'start' ) {
 			$this->startNew();
@@ -88,11 +93,14 @@ class Quiz {
 		if ( $_SESSION['lastQuestionAnswered'] < $number ) {
 			$timeRequired = microtime(true) - $_SESSION['timestamp'];
 			$_SESSION['timeElapsed'] += $timeRequired;
+			$answerIsCorrect = 0;
 			if ( $pickedOption === $question->answer ) {
 				$_SESSION['correctCount']++;
+				$answerIsCorrect = 1;
 			}
 			$timeRounded = round($timeRequired, 1);
-			$_SESSION['results'][] = "?{$this->questions[$number]->id}!{$question->answer}P{$pickedOption}T{$timeRounded}";
+			$_SESSION['results'][] = "?{$this->questions[$number]->id}!{$question->answer}P{$pickedOption}={$answerIsCorrect}T{$timeRounded}";
+			file_put_contents($this->logFileGranular, session_id() . ' ' . $_SESSION['results'][$number] . PHP_EOL, FILE_APPEND);
 		}
 		$_SESSION['lastQuestionAnswered'] = $number;
 
@@ -141,10 +149,10 @@ class Quiz {
 			}
 			$allScores[] = $otherScore;
 		}
-		$model->averageScore = round( array_sum($allScores) / count($otherScores) );
-		$model->scorePercentage = round( count($lowerScores) / count($otherScores) * 100 );
+		$model->averageScore = $otherScores ? round( array_sum($allScores) / count($otherScores) ) : 0;
+		$model->scorePercentage = $otherScores ? round( count($lowerScores) / count($otherScores) * 100 ) : 0;
 
-		// Cheating detection: over 80% correct, but less than one second per answer
+		// Cheating detection :P (over 80% correct, but less than one second per answer)
 		$model->cheater = ( $model->ratio > .8 && $model->time < count($this->questions) );
 
 		$model->showShareButtons = true;

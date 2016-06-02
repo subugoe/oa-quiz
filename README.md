@@ -38,8 +38,14 @@ Questions are stored in a JSON file at `app/data/questions.json`, which consists
 
 ## Logging
 
-The results for each participant are logged to `data/questions/scores.txt` with one line per completion.
+For each question answered, results are logged to `logs/answers.txt` with one line per question.
+
+	1461231886.9923?3!1P1=1T4.6
+
+The first value is the session ID, the second value reads as `{Session ID} ?{Question ID}!{Correct answer}P{Picked answer}={Correct (1) or wrong (0)}T{Seconds required}`.
+
+The results for each participant are logged to `logs/scores.txt` with one line per completion.
 
 	1461246275 ?2!1P3T1.3|?4!1P0T2.4|?3!1P1T1.5|?1!0P0T1.6|?5!0P0T7.8 2915
 
-First value is the Unix timestamp at completion, second is the order of questions and each given answer in the format `?{Question ID}!{Correct answer}P{Picked answer}T{Seconds required}` with questions delimited by `|`, third value is the score.
+The first value is the Unix timestamp at completion, the second value is the order of questions and each given answer in the format `?{Question ID}!{Correct answer}P{Picked answer}={Correct (1) or wrong (0)}T{Seconds required}` (same as above) with questions delimited by `|`, the third value is the score.
