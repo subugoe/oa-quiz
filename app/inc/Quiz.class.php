@@ -16,6 +16,10 @@ class Quiz {
 		// First GET key is the desired route
 		$route = key($_GET);
 
+		if ( ! touch($this->logFile) or ! touch($this->logFileGranular) ) {
+			die('Cannot write log files. Make sure the logs directory is writable.');
+		}
+
 		if ( $route === 'start' ) {
 			$this->startNew();
 		} elseif ( $route === 'question' ) {
@@ -47,7 +51,7 @@ class Quiz {
 
 	function startNew() {
 		$this->initSession();
-		
+
 		$_SESSION = [];
 		$_SESSION['correctCount'] = 0;
 		$_SESSION['lastQuestionShown'] = -1;
@@ -89,14 +93,14 @@ class Quiz {
 		if ( $_SESSION['lastQuestionAnswered'] < $number ) {
 			$timeRequired = microtime(true) - $_SESSION['timestamp'];
 			$_SESSION['timeElapsed'] += $timeRequired;
-			$correct = 0;
+			$answerIsCorrect = 0;
 			if ( $pickedOption === $question->answer ) {
 				$_SESSION['correctCount']++;
-				$correct = 1;
+				$answerIsCorrect = 1;
 			}
 			$timeRounded = round($timeRequired, 1);
-			$_SESSION['results'][] = "?{$this->questions[$number]->id}!{$question->answer}P{$pickedOption}={$correct}T{$timeRounded}";
-			file_put_contents($this->logFileGranular, $_SESSION['sessionStarted'] . $_SESSION['results'][$number] . PHP_EOL, FILE_APPEND);
+			$_SESSION['results'][] = "?{$this->questions[$number]->id}!{$question->answer}P{$pickedOption}={$answerIsCorrect}T{$timeRounded}";
+			file_put_contents($this->logFileGranular, session_id() . ' ' . $_SESSION['results'][$number] . PHP_EOL, FILE_APPEND);
 		}
 		$_SESSION['lastQuestionAnswered'] = $number;
 
@@ -111,7 +115,6 @@ class Quiz {
 		$model->moreQuestions = ( $number + 1 < count($this->questions) );
 		$model->time = round($_SESSION['timeElapsed']);
 		$this->renderTemplate('answer', $model);
-
 	}
 
 	function showResults() {
@@ -146,10 +149,10 @@ class Quiz {
 			}
 			$allScores[] = $otherScore;
 		}
-		$model->averageScore = round( array_sum($allScores) / count($otherScores) );
-		$model->scorePercentage = round( count($lowerScores) / count($otherScores) * 100 );
+		$model->averageScore = $otherScores ? round( array_sum($allScores) / count($otherScores) ) : 0;
+		$model->scorePercentage = $otherScores ? round( count($lowerScores) / count($otherScores) * 100 ) : 0;
 
-		// Cheating detection: over 80% correct, but less than one second per answer
+		// Cheating detection :P (over 80% correct, but less than one second per answer)
 		$model->cheater = ( $model->ratio > .8 && $model->time < count($this->questions) );
 
 		$model->showShareButtons = true;
