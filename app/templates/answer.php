@@ -11,9 +11,7 @@ namespace subugoe\oaquiz;
 </div>
 
 <p class="quiz_question">
-	<i class="fa fa-quote-right"></i>
-	<?=$model->question?>
-	<i class="fa fa-quote-left"></i>
+	<i class="fa fa-quote-right"></i>&nbsp;<?=$model->question?>&nbsp;<i class="fa fa-quote-left"></i>
 </p>
 
 <p class="quiz_p -small">Ihre Antwort:</p>
