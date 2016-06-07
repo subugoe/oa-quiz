@@ -1,30 +1,84 @@
 [
 	{
-		"id": 1,
-		"question": "Was versteht man im Kontext von Open Access unter dem <i>Goldenen Weg</i>?",
+		"id": "goldenroad",
+		"question": "Was ist der <i>Goldene Weg</i>?",
 		"options": [
-			"Die Veröffentlichung in einem Medium, dass den Bedingungen von Open Access folgt und die langfristige Verfügbarkeit und Archivierung sichert.",
+			"Die Erstveröffentlichung in einer Open Access-Zeitschrift.",
 			"Die Veröffentlichung auf der eigenen Homepage.",
 			"Die Publikation von verwaisten Werken, deren Urheberrecht abgelaufen ist.",
-			"Eine Möglichkeit, den Zugang zu Veröffentlichungen auf einen bestimmten Personenkreis zu beschränken."
+			"Eine Möglichkeit, den Zugang zu einer Veröffentlichung auf einen ausgewählten Personenkreis zu beschränken."
 		],
-		"info": "Mehr Informationen dazu <a href='https://open-access.net/informationen-zu-open-access/open-access-strategien/#c665' target='_blank'>finden Sie hier</a>.",
+		"answer": 0,
+		"info": "Open Access-Zeitschriften durchlaufen einen Peer-Review-Prozess, um die wissenschaftliche Qualität zu sichern. Der Zugang ist weltweit offen und kostenfrei. Mehr Informationen dazu <a href='https://open-access.net/informationen-zu-open-access/open-access-strategien/#c665' target='_blank'>finden Sie hier</a>."
+	},
+	{
+		"id": "oais",
+		"question": "Open Access ist &hellip;",
+		"options": [
+			"&hellip; ein Publikationsmodell.",
+			"&hellip; eine gemeinfreie Publikation.",
+			"&hellip; eine Open-Source-Lizenz.",
+			"&hellip; eine Gruppe nicht-kommerzieller Verlage."
+		],
 		"answer": 0
 	},
 	{
-		"id": 2,
-		"question": "Was ist im Kontext von Open Access mit dem <i>Grünen Weg</i> gemeint?",
+		"id": "greenroad",
+		"question": "Was ist mit dem <i>Grünen Weg</i> gemeint?",
 		"options": [
-			"Diesen Begriff gibt es gar nicht.",
-			"Die Veröffentlichung und Archivierung durch die Autoren selbst.",
-			"Der Verzicht auf Peer Review, um Artikel schneller zu veröffentlichen.",
+			"Diesen Begriff gibt es nicht.",
+			"Die parallele freie Veröffentlichung und Archivierung zusätzlich zur Verlagsversion, meist durch die Autoren selbst.",
+			"Der Verzicht auf Peer Review, damit Artikel schneller veröffentlicht werden können.",
 			"Die Veröffentlichung ausschließlich als Druckwerk."
 		],
-		"info": "Mehr Informationen dazu <a href='https://open-access.net/informationen-zu-open-access/open-access-strategien/#c666' target='_blank'>finden Sie hier</a>.",
 		"answer": 1
 	},
 	{
-		"id": 3,
+		"id": "money",
+		"question": "Wie können Verlage mit Open Access Geld verdienen?",
+		"options": [
+			"Bei vielen Journals zahlen die Autoren eine Gebühr, wenn ein Artikel zur Publikation angenommen wird.",
+			"Auch bei Open Access ist das Abonnement einer Zeitschrift kostenpflichtig.",
+			"Da die Verlage bei Open Access keinerlei Gebühren erheben, lässt sich mit Open Access kein Geld verdienen.",
+			"Da bei Open Access auf Begutachtung und Editionsarbeit verzichtet werden kann, machen Verlage damit sogar mehr Gewinn als mit Closed Access."
+		],
+		"answer": 0
+	},
+	{
+		"id": "apcs",
+		"question": "Welche Aussage zu <i>Article Processing Charges</i> (APCs) ist korrekt?",
+		"options": [
+			"APCs werden sowohl bei Open-Access-Journalen als auch bei Subskriptions&shy;zeitschriften als Finanzierungs&shy;möglichkeit genutzt.",
+			"APCs werden nur bei Open-Access-Artikeln erhoben, um die fehlenden Abo-Gebühren auszugleichen.",
+			"APCs werden nur von Subskriptions&shy;zeitschriften erhoben.",
+			"Beim Open-Access-Publizieren fallen keine APCs an."
+		],
+		"answer": 0
+	},
+	{
+		"id": "review",
+		"question": "Wie wird bei Open Access die wissenschaftliche Begutachtung <i>(peer review)</i> gehandhabt?",
+		"options": [
+			"Es gibt keine, weshalb Open-Access-Artikel oft eine niedrige Qualität haben.",
+			"Beim Publizieren auf dem <i>Goldenen Weg</i> ist das Verfahren meist dasselbe wie bei konventionellen Publikationen.",
+			"Eine Begutachtung findet nur freiwillig gegen Zahlung eines Entgeldes durch den Autor statt.",
+			"Nur begutachtete Artikel dürfen als Open Access bezeichnet werden."
+		],
+		"answer": 1
+	},
+	{
+		"id": "repoisnot",
+		"question": "Welche Aussage über institutionelle Repositorien stimmt <b>nicht</b>?",
+		"options": [
+			"Mit der Publikation meines Postprint-Artikels auf einem Repositorium erfülle ich die Open-Access-Verpflichtung meines Geldgebers.",
+			"Die Inhalte eines Repositoriums werden in der Regel auch von Suchmaschinen indiziert.",
+			"Als Autor erhalte ich üblicherweise Statistiken, wie oft mein Artikel herunter geladen wurde.",
+			"Bei den Artikeln im Repositorium wird auf Peer Review verzichtet."
+		],
+		"answer": 3
+	},
+	{
+		"id": "retrodig",
 		"question": "Unter Retrodigitalisierung versteht man &hellip;",
 		"options": [
 			"&hellip; das Einscannen von Lochkarten.",
@@ -35,27 +89,72 @@
 		"answer": 1
 	},
 	{
-		"id": 4,
-		"question": "Wie viele Dokumente sind derzeit auf <i>eDiss</i>, dem Open-Access-Publikationsserver für Dissertationen der Universität Göttingen, verfügbar?",
+		"id": "finance",
+		"question": "Bei Open Access wird das Publizieren finanziert …",
 		"options": [
-			"Exakt 2750",
-			"Etwa 5500",
-			"Etwa 500",
-			"Knapp 150"
+			"… durch die Autoren oder Unterstützer.",
+			"… vom Bildungsministerium.",
+			"… von den Abonnenten.",
+			"… von niemandem, da Open Access für alle Beteiligten kostenfrei ist."
 		],
-		"info": "<a href='https://ediss.uni-goettingen.de/' target='_blank'>Besuchen Sie eDiss.</a>",
-		"answer": 1
+		"answer": 0
 	},
 	{
-		"id": 5,
+		"id": "itsnot",
 		"question": "Was ist Open Access <b>nicht</b>?",
 		"options": [
 			"Eine bestimmte Lizenz.",
 			"Eine weltweite Initiative, wissenschaftliche Publikationen frei verfügbar zu machen.",
 			"Ein Publikationsmodell.",
-			"Eine Gefahr für Verlage, die stark überhöhte Preise für Zeitschriften verlangen."
+			"Ein Versuch, das etablierte Publikationswesen grundlegend zu ändern."
 		],
-		"info": "Obgleich die meisten als Open Access verfügbaren Publikationen unter einer <a href='http://de.creativecommons.org/was-ist-cc/' target='_blank'>Creative-Commons-Lizenz</a> stehen, gibt Open Access keine konkrete Lizenz vor. Einzelne Zeitschriften können sich aber auf eine Lizenz festlegen.",
+		"answer": 0,
+		"info": "Obgleich die meisten als Open Access verfügbaren Publikationen unter einer <a href='http://de.creativecommons.org/was-ist-cc/' target='_blank'>Creative-Commons-Lizenz</a> stehen, gibt Open Access keine Lizenz vor. Einzelne Zeitschriften können sich jedoch auf eine bestimmte offene Lizenz festlegen."
+	},
+	{
+		"id": "reputation",
+		"question": "Welche Aussage zur wissenschaftliche Anerkennung von Open-Access-Artikeln stimmt?",
+		"options": [
+			"Bei Open-Access-Journals durchlaufen Artikel in der Regel einen wissenschaftlichen Review-Prozess.",
+			"Open-Access-Artikel werden generell nicht geprüft, können dadurch aber sehr schnell publiziert werden.",
+			"Open-Access-Artikel haben nur eine geringe wissenschaftliche Bedeutung, da sie nicht in wichtige Datenbanken aufgenommen werden.",
+			"Nur Journals mit einem niedrigen Impact-Factor sind Open Access."
+		],
 		"answer": 0
+	},
+	{
+		"id": "colors",
+		"question": "Welche verschiedenen Wege gibt es bei Open Access?",
+		"options": [
+			"Den Goldenen und den Grünen Weg.",
+			"Den Weißen und den Schwarzen Weg.",
+			"Den Goldenen und den Silbernen Weg.",
+			"Den Blauen und den Roten Weg."
+		],
+		"answer": 0,
+		"info": "Mehr Informationen dazu <a href='https://open-access.net/informationen-zu-open-access/open-access-strategien/#c665' target='_blank'>finden Sie hier</a>."
+	},
+	{
+		"id": "tworoads",
+		"question": "Worin unterscheiden sich der Grüne Weg und der Goldene Weg?",
+		"options": [
+			"Beim Goldenen Weg ist die Open-Access-Veröffentlichung die Primärquelle, beim Grünen Weg ist sie eine parallele Quelle.",
+			"Beim Goldenen Weg bieten die Verlage mehr Service an, zum Beispiel Editionsarbeit.",
+			"Beim Goldenen Weg findet eine Begutachtung <i>(peer review)</i> statt, beim grünen Weg gibt es keine Qualitätsprüfung.",
+			"Der Goldene Weg ist legal, der Grüne Weg ist illegal."
+		],
+		"answer": 0
+	},
+	{
+		"id": "sherpa",
+		"question": "Was ist SHERPA/RoMEO?",
+		"options": [
+			"Ein attraktiver Himalaya-Bewohner.",
+			"Shared Hosting Electronic Resource and Publication Access / Regional Modular Edition Organisation.",
+			"Eine Auszeichnung für wissenschaftliche Autorinnen und Autoren.",
+			"Eine Datenbank, die über die Standardbedingungen der Verlage zur Selbstarchivierung von Pre- und Postprints informiert."
+		],
+		"answer": 3,
+		"info": "<a href='http://www.sherpa.ac.uk/romeo/index.php' target='_blank'>Besuchen Sie SHERPA/RoMEO.</a>"
 	}
 ]

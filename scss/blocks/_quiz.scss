@@ -90,6 +90,7 @@
 	transition: background .5s, color .5s !important;
 	width: 100%;
 
+	&:active,
 	&:focus,
 	&:hover {
 		background: lighten($button-bg-color, 14);
@@ -167,6 +168,7 @@
 		border-bottom: 2px solid $accent-color-dark;
 		transition: border-color .5s;
 
+		&:active,
 		&:focus,
 		&:hover {
 			border-color: $link-color;
@@ -190,6 +192,8 @@
 	overflow: hidden;
 	transition: background .5s, color .5s, text-shadow .5s;
 
+	&:active,
+	.quiz_radio:focus + &,
 	&:focus,
 	&:hover {
 		background: $accent-color-light;
@@ -241,7 +245,8 @@
 }
 
 .quiz_radio {
-	display: none;
+	opacity: 0;
+	position: absolute;
 }
 
 .quiz_row {

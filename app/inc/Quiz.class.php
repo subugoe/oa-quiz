@@ -175,8 +175,7 @@ class Quiz {
 		$this->questions = (array)json_decode($questionsJson);
 
 		if ( ! $this->questions ) {
-			trigger_error('Questions could not be loaded', E_USER_ERROR);
-			die();
+			die('Questions could not be loaded.');
 		}
 
 		if ( $this->shuffleQuestions ) {
