@@ -67,17 +67,6 @@
 		"answer": 1
 	},
 	{
-		"id": "repoisnot",
-		"question": "Welche Aussage über institutionelle Repositorien stimmt <b>nicht</b>?",
-		"options": [
-			"Mit der Publikation meines Postprint-Artikels auf einem Repositorium erfülle ich die Open-Access-Verpflichtung meines Geldgebers.",
-			"Die Inhalte eines Repositoriums werden in der Regel auch von Suchmaschinen indiziert.",
-			"Als Autor erhalte ich üblicherweise Statistiken, wie oft mein Artikel herunter geladen wurde.",
-			"Bei den Artikeln im Repositorium wird auf Peer Review verzichtet."
-		],
-		"answer": 3
-	},
-	{
 		"id": "retrodig",
 		"question": "Unter Retrodigitalisierung versteht man &hellip;",
 		"options": [
