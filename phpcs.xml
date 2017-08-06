@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<ruleset name="PSR2-tabs-1TBS">
+	<description>Tabs FTW and 1TBS</description>
+	<arg name="tab-width" value="4"/>
+	<rule ref="PSR2">
+		<!-- Allow tabs -->
+		<exclude name="Generic.WhiteSpace.DisallowTabIndent"/>
+
+		<!-- Allow opening and closing braces for functions and classes to be on the same line -->
+		<exclude name="Squiz.Functions.MultiLineFunctionDeclaration.BraceOnSameLine"/>
+		<exclude name="PSR2.Classes.ClassDeclaration.OpenBraceNewLine"/>
+		<exclude name="Squiz.WhiteSpace.ScopeClosingBrace"/>
+
+		<!-- Disable newline after opening brace -->
+		<exclude name="Squiz.ControlStructures.ControlSignature.NewlineAfterOpenBrace"/>
+	</rule>
+	<rule ref="Generic.WhiteSpace.DisallowSpaceIndent"/>
+	<rule ref="Generic.WhiteSpace.ScopeIndent">
+		<properties>
+			<property name="indent" value="4"/>
+			<property name="tabIndent" value="true"/>
+		</properties>
+	</rule>
+</ruleset>
