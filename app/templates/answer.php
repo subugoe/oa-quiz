@@ -16,7 +16,16 @@
 		<i class="fa fa-check"></i>
 		<span class="quiz_answer-text"><?=$model->correctAnswer?></span>
 	</p>
-	<p class="quiz_p"><?=( rand(0, 2) > 1 ? 'Das ist richtig.' : 'So ist es.' )?></p>
+	<p class="quiz_p">
+		<?php $number = rand(0, 2); ?>
+		<?php if ($number === 0) { ?>
+			Das ist richtig.
+		<?php } elseif ($number === 1) { ?>
+			So ist es.
+		<?php } else { ?>
+			Ganz genau.
+		<?php } ?>
+	</p>
 <?php } else { ?>
 	<p class="quiz_answer -false">
 		<i class="fa fa-times"></i>
