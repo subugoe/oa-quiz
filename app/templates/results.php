@@ -1,7 +1,3 @@
-<?php
-namespace subugoe\oaquiz;
-?>
-
 <div class="quiz_row">
 	<h1>Ergebnis</h1>
 	<span class="quiz_time" title="Benötigte Zeit">
@@ -12,16 +8,17 @@ namespace subugoe\oaquiz;
 
 <p class="quiz_p">
 	Sie haben <?=$model->correctCount?> von <?=$model->allCount?> Fragen richtig beantwortet.
-	<?php if ( $model->ratio === 1 ) { ?>
+	<?php if ($model->ratio === 1) { ?>
 		Super. Falls Sie das nicht ohnehin bereits tun: Helfen Sie uns, Open Access bekannter zu machen!
-	<?php } elseif ( $model->ratio >= .8 ) { ?>
+	<?php } elseif ($model->ratio >= .8) { ?>
 		Sehr gut! Sie sind auf dem besten Wege, Open-Access-Expertin/-Experte zu werden.
-	<?php } elseif ( $model->ratio >= .5 ) { ?>
+	<?php } elseif ($model->ratio >= .5) { ?>
 		Schon nicht schlecht, aber da ist noch Luft nach oben.
-	<?php } elseif ( $model->ratio > .2) { ?>
+	<?php } elseif ($model->ratio > .2) { ?>
 		Das ist ein Anfang. Am besten gleich nochmal versuchen.
 	<?php } else { ?>
-		Glüchwunsch, Ihr Ergebnis ist schlechter als das durchschnittliche derjenigen, die einfach zufällig irgendetwas anklicken
+		Glüchwunsch, Ihr Ergebnis ist schlechter als das durchschnittliche
+		derjenigen, die einfach zufällig irgendetwas anklicken
 		<i class="fa fa-smile-o"></i>
 	<?php } ?>
 </p>
@@ -32,7 +29,7 @@ namespace subugoe\oaquiz;
 	<?=$model->cheater ? 'Haha, netter Versuch, Cheater!' : $model->score?>
 </p>
 
-<?php if ( $model->averageScore ) { ?>
+<?php if ($model->averageScore) { ?>
 	<p class="quiz_p">
 		Damit sind Sie besser als <?=$model->scorePercentage?>&thinsp;% der Teilnehmer.
 		Durchschnittlich wurden <?=$model->averageScore?> Punkte erreicht.
@@ -50,5 +47,4 @@ namespace subugoe\oaquiz;
 	<a href="http://open-access.net/kontakt/" target="_blank">Wir freuen uns über Ihre Rückmeldung</a>.
 </p>
 
-<div class="shariff" data-title="<?=$model->score?> Punkte beim #OpenAccessQuiz! Auch versuchen?">
-</div>
+<?=$this->shareButtons("$model->score Punkte beim #OpenAccessQuiz! Auch versuchen?")?>

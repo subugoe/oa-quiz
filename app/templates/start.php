@@ -1,7 +1,3 @@
-<?php
-namespace subugoe\oaquiz;
-?>
-
 <h1>Kennen Sie Open Access?</h1>
 
 <p class="quiz_p">
@@ -22,4 +18,4 @@ namespace subugoe\oaquiz;
 
 <p class="quiz_p -small">Das Quiz dauert weniger als <?=$model->minutes?> Minuten.</p>
 
-<div class="shariff" data-title="Teste Dein Wissen über #OpenAccess!"></div>
+<?=$this->shareButtons('Teste Dein Wissen über #OpenAccess!')?>

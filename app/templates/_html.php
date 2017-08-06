@@ -1,12 +1,10 @@
-<?php
-namespace subugoe\oaquiz;
-?><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Open-Access-Quiz</title>
-	<?php if ( isset($model->showShareButtons) ) { ?>
+	<?php if (isset($model->showShareButtons)) { ?>
 		<link rel="stylesheet" href="assets/shariff.min.css">
 	<?php } ?>
 	<link rel="stylesheet" href="assets/style.css">
@@ -28,9 +26,8 @@ namespace subugoe\oaquiz;
 
 	<script src="assets/jquery.min.js"></script>
 	<script src="assets/quiz.js"></script>
-	<?php if ( isset($model->showShareButtons) ) { ?>
+	<?php if (isset($model->showShareButtons)) { ?>
 		<script src="assets/shariff.min.js"></script>
-		<script src="assets/share-buttons.js"></script>
 	<?php } ?>
 </body>
 </html>

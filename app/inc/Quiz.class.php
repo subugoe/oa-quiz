@@ -2,44 +2,57 @@
 namespace subugoe\oaquiz;
 
 class Quiz {
-	private $questions = [];
-	private $questionsOrder = [];
-	private $correctCount = 0;
-	private $maxQuestions = 10;
-	private $shuffleQuestions = true;
-	private $shuffleOptions = true;
-	private $questionsFile = 'data/questions.json';
-	private $logFile = 'logs/scores.txt';
-	private $logFileGranular = 'logs/answers.txt';
+	public $maxQuestions = 10;
+	public $shareServices = ['twitter', 'facebook', 'googleplus', 'tumblr'];
+	public $shuffleQuestions = true;
+	public $shuffleOptions = true;
+	public $questionsFile = 'data/questions.json';
+	public $logFile = 'logs/scores.txt';
+	public $logFileGranular = 'logs/answers.txt';
 
-	function __construct() {
+	protected $questions = [];
+	protected $questionsOrder = [];
+	protected $correctCount = 0;
+
+	public function run() {
 		// First GET key is the desired route
 		$route = key($_GET);
 
-		if ( ! touch($this->logFile) or ! touch($this->logFileGranular) ) {
+		if (!touch($this->logFile) or !touch($this->logFileGranular)) {
 			die('Cannot write log files. Make sure the logs directory is writable.');
 		}
 
-		if ( $route === 'start' ) {
+		if ($route === 'start') {
 			$this->startNew();
-		} elseif ( $route === 'question' ) {
+		} elseif ($route === 'question') {
 			$this->showQuestion();
-		} elseif ( $route === 'answer' ) {
+		} elseif ($route === 'answer') {
 			// Force positive integer
 			$pick = isset($_POST['pick']) ? intval(preg_replace('/\D/', '', $_POST['pick'])) : false;
-			if ( $pick === false ) {
+			if ($pick === false) {
 				$this->showQuestion();
 			} else {
 				$this->checkAnswer($pick);
 			}
-		} elseif ( $route === 'results' ) {
+		} elseif ($route === 'results') {
 			$this->showResults();
 		} else {
 			$this->showStartPage();
 		}
 	}
 
-	function showStartPage() {
+	protected function shareButtons($text) {
+		$services = '[$quot;' . join('$quot;,$quot;', $this->shareServices) . '$quot;]';
+		$text = htmlspecialchars($text, ENT_QUOTES | ENT_HTML5);
+		$url = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://{$_SERVER['HTTP_HOST']}" . strtok($_SERVER['REQUEST_URI'], '?');
+		return "<div class='shariff'"
+			. " data-services='$services'"
+			. " data-title='$text'"
+			. " data-url='$url'"
+			. "></div>";
+	}
+
+	protected function showStartPage() {
 		// Set to check if cookies are enabled
 		setcookie('test', 'test', time() + 3600);
 
@@ -49,7 +62,7 @@ class Quiz {
 		$this->renderTemplate('start', $model);
 	}
 
-	function startNew() {
+	protected function startNew() {
 		$this->initSession();
 
 		$_SESSION = [];
@@ -64,15 +77,15 @@ class Quiz {
 		header('location: ' . $this->urlWithoutParams() . '?question', true, 303); // "See Other"
 	}
 
-	function showQuestion() {
+	protected function showQuestion() {
 		$this->initSession();
 
 		$number = $_SESSION['lastQuestionAnswered'] + 1;
-		if ( $number >= count($this->questions) ) {
+		if ($number >= count($this->questions)) {
 			$this->showResults();
 			return false;
 		}
-		if ( $_SESSION['lastQuestionShown'] < $number ) {
+		if ($_SESSION['lastQuestionShown'] < $number) {
 			$_SESSION['timestamp'] = microtime(true);
 		}
 		$_SESSION['lastQuestionShown'] = $number;
@@ -85,44 +98,52 @@ class Quiz {
 		$this->renderTemplate('question', $model);
 	}
 
-	function checkAnswer($pickedOption) {
+	protected function checkAnswer($pickedOption) {
 		$this->initSession();
 
 		$number = $_SESSION['lastQuestionShown'];
 		$question = $this->questions[$number];
-		if ( $_SESSION['lastQuestionAnswered'] < $number ) {
+		if ($_SESSION['lastQuestionAnswered'] < $number) {
 			$timeRequired = microtime(true) - $_SESSION['timestamp'];
 			$_SESSION['timeElapsed'] += $timeRequired;
 			$answerIsCorrect = 0;
-			if ( $pickedOption === $question->answer ) {
+			if ($pickedOption === $question->answer) {
 				$_SESSION['correctCount']++;
 				$answerIsCorrect = 1;
 			}
 			$timeRounded = round($timeRequired, 1);
-			$_SESSION['results'][] = "?{$this->questions[$number]->id}!{$question->answer}P{$pickedOption}={$answerIsCorrect}T{$timeRounded}";
-			file_put_contents($this->logFileGranular, session_id() . ' ' . $_SESSION['results'][$number] . PHP_EOL, FILE_APPEND);
+			$_SESSION['results'][] = "?{$this->questions[$number]->id}"
+				. "!{$question->answer}"
+				. "P{$pickedOption}"
+				. "={$answerIsCorrect}"
+				. "T{$timeRounded}";
+			file_put_contents(
+				$this->logFileGranular,
+				session_id() . ' ' . $_SESSION['results'][$number] . PHP_EOL,
+				FILE_APPEND
+			);
 		}
 		$_SESSION['lastQuestionAnswered'] = $number;
 
 		$model = new \stdClass();
 		$model->question = $question->question;
-		$model->answeredCorrectly = ( $pickedOption === $question->answer );
+		$model->answeredCorrectly = ($pickedOption === $question->answer);
 		$model->correctAnswer = $question->options[$question->answer];
 		$model->pickedAnswer = $question->options[$pickedOption];
-		$model->info = ( isset($question->info) ? $question->info : '' );
+		$model->info = (isset($question->info) ? $question->info : '');
 		$model->questionsCount = count($this->questions);
 		$model->number = $number + 1;
-		$model->moreQuestions = ( $number + 1 < count($this->questions) );
+		$model->moreQuestions = ($number + 1 < count($this->questions));
 		$model->time = round($_SESSION['timeElapsed']);
 		$this->renderTemplate('answer', $model);
 	}
 
-	function showResults() {
+	protected function showResults() {
 		$this->initSession();
 
 		$quizRunning = isset($_SESSION['lastQuestionAnswered']) && $_SESSION['lastQuestionAnswered'] >= 0;
 		$quizCompleted = $_SESSION['lastQuestionAnswered'] === count($this->questions) - 1;
-		if ( ! $quizRunning || ! $quizCompleted ) {
+		if (! $quizRunning || ! $quizCompleted) {
 			header('location: ' . $this->urlWithoutParams() . '?question', true, 303); // "See Other"
 		}
 
@@ -134,26 +155,31 @@ class Quiz {
 
 		// Get others' scores and calculate position
 		$otherScores = file($this->logFile, FILE_IGNORE_NEW_LINES);
-		if ( $_SESSION['score'] === false ) {
-			$_SESSION['score'] = round( $model->allCount * 1000 * $model->ratio / (1 + $_SESSION['timeElapsed'] / $model->allCount * .01) );
-			file_put_contents($this->logFile, time() . ' ' . implode('|', $_SESSION['results']) . ' ' . $_SESSION['score'] . PHP_EOL, FILE_APPEND);
+		if ($_SESSION['score'] === false) {
+			$divisor = 1 + $_SESSION['timeElapsed'] / $model->allCount * .01;
+			$_SESSION['score'] = round($model->allCount * 1000 * $model->ratio / $divisor);
+			file_put_contents(
+				$this->logFile,
+				time() . ' ' . implode('|', $_SESSION['results']) . ' ' . $_SESSION['score'] . PHP_EOL,
+				FILE_APPEND
+			);
 		}
 		$model->score = $_SESSION['score'];
 		$allScores = [];
 		$lowerScores = [];
-		foreach ( $otherScores as $line ) {
+		foreach ($otherScores as $line) {
 			$parts = explode(' ', $line);
 			$otherScore = $parts[2];
-			if ( $model->score > $otherScore) {
+			if ($model->score > $otherScore) {
 				$lowerScores[] = $otherScore;
 			}
 			$allScores[] = $otherScore;
 		}
-		$model->averageScore = $otherScores ? round( array_sum($allScores) / count($otherScores) ) : 0;
-		$model->scorePercentage = $otherScores ? round( count($lowerScores) / count($otherScores) * 100 ) : 0;
+		$model->averageScore = $otherScores ? round(array_sum($allScores) / count($otherScores)) : 0;
+		$model->scorePercentage = $otherScores ? round(count($lowerScores) / count($otherScores) * 100) : 0;
 
 		// Cheating detection :P (over 80% correct, but less than one second per answer)
-		$model->cheater = ( $model->ratio > .8 && $model->time < count($this->questions) );
+		$model->cheater = ($model->ratio > .8 && $model->time < count($this->questions));
 
 		$model->showShareButtons = true;
 		$this->renderTemplate('results', $model);
@@ -162,11 +188,11 @@ class Quiz {
 	private function initSession() {
 		session_start();
 
-		if ( ! isset($_SESSION['sessionStarted']) || ! isset($_COOKIE['test']) || ! $_COOKIE['test'] === 'test') {
+		if (! isset($_SESSION['sessionStarted']) || ! isset($_COOKIE['test']) || ! $_COOKIE['test'] === 'test') {
 			header('location: ' . $this->urlWithoutParams(), true, 303); // "See Other"
 		}
 
-		if ( isset($_SESSION['questions']) ) {
+		if (isset($_SESSION['questions'])) {
 			$this->questions = $_SESSION['questions'];
 			return true;
 		}
@@ -174,15 +200,15 @@ class Quiz {
 		$questionsJson = file_get_contents($this->questionsFile);
 		$this->questions = (array)json_decode($questionsJson);
 
-		if ( ! $this->questions ) {
+		if (! $this->questions) {
 			die('Questions could not be loaded.');
 		}
 
-		if ( $this->shuffleQuestions ) {
+		if ($this->shuffleQuestions) {
 			shuffle($this->questions);
 		}
-		if ( $this->shuffleOptions ) {
-			foreach ( $this->questions as &$question ) {
+		if ($this->shuffleOptions) {
+			foreach ($this->questions as &$question) {
 				$this->shuffleAssoc($question->options);
 			}
 		}
@@ -198,7 +224,7 @@ class Quiz {
 	private function shuffleAssoc(&$array) {
 		$keys = array_keys($array);
 		shuffle($keys);
-		foreach($keys as $key) {
+		foreach ($keys as $key) {
 			$new[$key] = $array[$key];
 		}
 		$array = $new;
