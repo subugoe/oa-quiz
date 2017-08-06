@@ -13,7 +13,7 @@
 <body class="quiz">
 	<div class="quiz_warning">Bitte erlauben Sie JavaScript und Cookies für diese Website.</div>
 
-	<header class="quiz_header" role="banner">
+	<header class="quiz_header">
 		<a href="<?=$this->urlWithoutParams()?>">
 			<img class="quiz_logo" src="assets/oa.svg" alt="Open Access">
 			<div class="quiz_heading">Quiz</div>
