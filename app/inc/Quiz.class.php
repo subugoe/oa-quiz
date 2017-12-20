@@ -42,7 +42,7 @@ class Quiz {
 	}
 
 	protected function shareButtons($text) {
-		$services = '[$quot;' . join('$quot;,$quot;', $this->shareServices) . '$quot;]';
+		$services = '[&quot;' . join('&quot;,&quot;', $this->shareServices) . '&quot;]';
 		$text = htmlspecialchars($text, ENT_QUOTES | ENT_HTML5);
 		$url = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://{$_SERVER['HTTP_HOST']}" . strtok($_SERVER['REQUEST_URI'], '?');
 		return "<div class='shariff'"
